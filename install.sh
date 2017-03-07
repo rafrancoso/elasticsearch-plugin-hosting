@@ -1,11 +1,12 @@
-#!/bin/bash
-
 name=$1
 pluginName=$2
+suffix=$3
 
 echo goint to install $name
 
 subPath=${name#*/}
+
+echo $subPath
 
 prjName=${subPath%/*}
 
@@ -13,9 +14,6 @@ if [ X"" = X"$pluginName" ];
 then
     pluginName=${prjName#elasticsearch-}
 fi
-
-suffix=${subPath#$prjName}
-suffix=${suffix#/}
 
 if [ X"" = X"$suffix" ];
 then
@@ -30,12 +28,13 @@ echo prjName: $prjName
 echo pluginName: $pluginName
 echo suffix: $suffix
 echo downloadFile: $downloadFile
+echo unzipFilderName: $unzipFilderName
 
 
 
 cd _plugin
 
-wget -O ${pluginName}.zip https://github.com/$name/archive/master.zip
+wget -O ${pluginName}.zip $downloadFile
 
 unzip ${pluginName}.zip
 
